@@ -40,13 +40,24 @@ function postCar(car) {
   })
 }
 
+function deleteCar(plate) {
+  return fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({ plate})
+  })
+}
+
 function showCars(cars) {
+  tableBody.innerHTML = ''
+
   if (cars.length === 0) {
     const row = tableBody.insertRow(-1)
     row.innerHTML = "Nenhum carro encontrado"
   } else {
     errorDiv.classList.add('hide')
-    tableBody.innerHTML = ''
     cars.forEach(car => createRow(car))
   }
 }
@@ -74,6 +85,7 @@ function createRow(data) {
   const year = row.insertCell(2)
   const plate = row.insertCell(3)
   const color = row.insertCell(4)
+  const excluir = row.insertCell(5)
 
   const imageTag = document.createElement('img')
   imageTag.src = data.image
@@ -82,6 +94,20 @@ function createRow(data) {
   year.innerHTML = `${data.year}`
   plate.innerHTML = `${data.plate}`
   color.innerHTML = `${data.color}`
+
+  const button = document.createElement('button')
+  button.innerHTML = 'X'
+  button.onclick = deleteRow(data.plate)
+  excluir.appendChild(button)
+}
+
+function deleteRow(plate) {
+  return () => {
+    deleteCar(plate)
+      .then(handleResponse)
+      .then(() => getCars())
+      .catch(handleError)
+  }
 }
 
 form.appendChild(errorDiv)
