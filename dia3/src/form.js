@@ -25,7 +25,6 @@ function capitalize(word) {
 
 const select = document.createElement('select')
 select.setAttribute('multiple', 'multiple')
-form.appendChild(select)
 
 const colors = ['CornflowerBlue', 'DarkSeaGreen', 'IndianRed', 'GoldenRod', 'RebeccaPurple']
 
@@ -35,7 +34,6 @@ colors.forEach(color => {
 })
 
 const colorsContainer = document.createElement('div')
-form.appendChild(colorsContainer)
 
 select.addEventListener('change', e => {
   clearColorsContainer()
@@ -52,3 +50,6 @@ function createColorDiv(color) {
   div.setAttribute('style', `display:inline-block;height:100px;width:100px;background-color:${color}`)
   colorsContainer.appendChild(div)
 }
+
+form.appendChild(select)
+form.appendChild(colorsContainer)
