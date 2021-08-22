@@ -2,41 +2,25 @@ const inputName = document.querySelector('[data-js="name"]')
 const form = document.querySelector('[data-js="form"')
 
 inputName.addEventListener('input', event => {
-  event.target.value = formatInput(event.target.value, event.data)
+  event.target.value = formatWords(event.target.value)
 })
 
-function formatInput(totalInput, currentChar) {
-  return formatCurrentWord(totalInput) ? formatCurrentWord(totalInput) : formatCurrentChar(totalInput, currentChar)
+function formatWords(input) {
+  const words = input.split(' ')
+  return words.map(fixCase).join(' ')
 }
 
-function formatCurrentWord(totalInput) {
+function fixCase(word) {
   const connectionWords =  ["de", "da", "do", "dos"]
-  const words = totalInput.split(' ')
-  const currentWord = words[words.length - 1]
 
-  if (connectionWords.includes(currentWord.toLowerCase())) {
-    words[words.length - 1] = currentWord.toLowerCase()
-    return words.join(' ')
-  } else if (currentWord === currentWord.toLowerCase()) {
-    words[words.length - 1] = capitalize(currentWord)
-    return words.join(' ')
-  }
-}
-
-function formatCurrentChar(totalInput, currentChar) {
-  const lastChar = totalInput[totalInput.length - 2]
-  const inputWithoutLastChar = totalInput.substring(0, totalInput.length - 1)
-
-  if (currentChar === null)
-    return totalInput
-  else if (lastChar === ' ' || lastChar === undefined)
-    return inputWithoutLastChar + currentChar.toUpperCase()
+  if (connectionWords.includes(word.toLowerCase()))
+    return word.toLowerCase()
   else
-    return inputWithoutLastChar + currentChar.toLowerCase()
+    return capitalize(word)
 }
 
 function capitalize(word) {
-  return word.charAt(0).toUpperCase() + word.slice(1)
+  return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
 }
 
 const select = document.createElement('select')
