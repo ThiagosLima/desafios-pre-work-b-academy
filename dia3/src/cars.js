@@ -13,7 +13,7 @@ carsForm.addEventListener('submit', e => {
   }
 
   createRow(carData)
-  clearForm(e.target)
+  carsForm.reset()
   e.target.image.focus()
 })
 
@@ -32,12 +32,4 @@ function createRow(data) {
   year.innerHTML = `${data.year}`
   licensePlate.innerHTML = `${data.licensePlate}`
   color.innerHTML = `${data.color}`
-}
-
-function clearForm(target) {
-  target.image.value = ''
-  target.model.value = ''
-  target.year.value = ''
-  target['license-plate'].value = ''
-  target.color.value = ''
 }
