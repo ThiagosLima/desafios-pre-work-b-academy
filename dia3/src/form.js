@@ -43,7 +43,7 @@ const select = document.createElement('select')
 select.setAttribute('multiple', 'multiple')
 form.appendChild(select)
 
-const colors = ['blue', 'green', 'red', 'yellow', 'purple']
+const colors = ['CornflowerBlue', 'DarkSeaGreen', 'IndianRed', 'GoldenRod', 'RebeccaPurple']
 
 colors.forEach(color => {
   const option = new Option(color, color)
