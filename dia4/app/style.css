@@ -21,3 +21,7 @@ td, th {
 img {
   max-width: 200px;
 }
+
+.hide {
+  display: none
+}
