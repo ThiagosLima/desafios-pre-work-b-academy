@@ -1,4 +1,5 @@
 const inputName = document.querySelector('[data-js="name"]')
+const form = document.querySelector('[data-js="form"')
 
 inputName.addEventListener('input', event => {
   event.target.value = formatInput(event.target.value, event.data)
@@ -36,4 +37,34 @@ function formatCurrentChar(totalInput, currentChar) {
 
 function capitalize(word) {
   return word.charAt(0).toUpperCase() + word.slice(1)
+}
+
+const select = document.createElement('select')
+select.setAttribute('multiple', 'multiple')
+form.appendChild(select)
+
+const colors = ['blue', 'green', 'red', 'yellow', 'purple']
+
+colors.forEach(color => {
+  const option = new Option(color, color)
+  select.appendChild(option)
+})
+
+const colorsContainer = document.createElement('div')
+form.appendChild(colorsContainer)
+
+select.addEventListener('change', e => {
+  clearColorsContainer()
+  const selected = [...e.target.selectedOptions].map(el => el.value)
+  selected.forEach(el => createColorDiv(el))
+})
+
+function clearColorsContainer() {
+  colorsContainer.innerHTML = ''
+}
+
+function createColorDiv(color) {
+  const div = document.createElement('div')
+  div.setAttribute('style', `display:inline-block;height:100px;width:100px;background-color:${color}`)
+  colorsContainer.appendChild(div)
 }
